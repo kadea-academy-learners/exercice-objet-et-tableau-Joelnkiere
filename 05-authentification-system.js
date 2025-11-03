@@ -104,8 +104,32 @@ function signUp(nom, email, password, confirmPassword) {
 }
 console.log(signUp("joe", "joe@gmail.com", "Joe", "Joe"));
 
-function login() {
+function login(email, password) {
+    for (let i = 0; i < baseDeDonnees.length; i++) {
+        const utilisateur = baseDeDonnees[i];
 
+        // On vérifie si on a trouvé le bon utilisateur
+        if (utilisateur.email === email) {
+
+            // Si le mot de passe ne correspond pas
+            if (utilisateur.password !== password) {
+                return "Mot de passe incorrect";
+            }
+
+            // Si l'utilisateur est bloqué
+            if (utilisateur.estBloque === true) {
+                return "Cet utilisateur n'a pas accès !";
+            }
+
+            // Sinon, tout est bon → on le connecte
+            utilisateur.estConnecte = true;
+            return utilisateur;
+        }
+    }
+    //   Si on a parcouru tout le tableau sans trouver d'email correspondant
+    return "Email introuvable ou utilisateur inexistant";
 }
+console.log(login("joe@gmail.com", "Joe"))
+
 
 module.exports = { baseDeDonnees, signUp, login };
