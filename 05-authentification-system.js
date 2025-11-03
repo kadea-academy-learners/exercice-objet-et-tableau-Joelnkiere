@@ -78,13 +78,14 @@ const baseDeDonnees = [
 ];
 
 function signUp(nom, email, password, confirmPassword) {
+    if (password !== confirmPassword) {
+        return "Erreur: les mots de passe ne correspondent pas"
 
+    }
     for (let i = 0; i < baseDeDonnees.length; i++) {
         const utilisateur = baseDeDonnees[i];
         if (utilisateur.email === email) {
-            return "cet utilisateur existe déjà"
-        } else if (password !== confirmPassword) {
-            return "mot de passe incorrect"
+            return "Erreur: cet email existe déjà"
         }
 
     }
@@ -113,12 +114,12 @@ function login(email, password) {
 
             // Si le mot de passe ne correspond pas
             if (utilisateur.password !== password) {
-                return "Mot de passe incorrect";
+                return "Erreur: mot de passe incorrect";
             }
 
             // Si l'utilisateur est bloqué
             if (utilisateur.estBloque === true) {
-                return "Cet utilisateur n'a pas accès !";
+                return "Erreur: utilisateur bloqué";
             }
 
             // Sinon, tout est bon → on le connecte
@@ -127,7 +128,7 @@ function login(email, password) {
         }
     }
     //   Si on a parcouru tout le tableau sans trouver d'email correspondant
-    return "Email introuvable ou utilisateur inexistant";
+    return "Erreur: utilisateur non trouvé";
 }
 console.log(login("joe@gmail.com", "Joe"))
 
