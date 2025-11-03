@@ -18,14 +18,94 @@
 //    - Si l'utilisateur est bloqué (`estBloque` à true), retourne un message d'erreur spécifique.
 //    - Sinon, met à jour `estConnecte` à true pour cet utilisateur et retourne l'objet utilisateur connecté.
 
-const baseDeDonnees = [];
+const baseDeDonnees = [
+    {
+        id: 1,
+        nom: "nkiere",
+        email: "nkierejoe@gmail.com",
+        password: "J1234#!",
+        estConnecte: true,
+        estBloque: false
+    },
+    {
+        id: 2,
+        nom: "bobette",
+        email: "bobette@mail.com",
+        password: "B1234#!",
+        estConnecte: false,
+        estBloque: true
+    },
+    {
+        id: 3,
+        nom: "machack",
+        email: "mechack@gmail.com",
+        password: "M1234#!",
+        estConnecte: false,
+        estBloque: false
+    },
+    {
+        id: 4,
+        nom: "exauce",
+        email: "exauce@gmail.com",
+        password: "E1234#!",
+        estConnecte: true,
+        estBloque: false
+    },
+    {
+        id: 5,
+        nom: "celio",
+        email: "celio@gmail.com",
+        password: "C1234#!",
+        estConnecte: false,
+        estBloque: false
+    },
+    {
+        id: 6,
+        nom: "jean-dino",
+        email: "jean-dino@gmail.com",
+        password: "JD1234#!",
+        estConnecte: true,
+        estBloque: false
+    },
+    {
+        id: 7,
+        nom: "Merdi",
+        email: "merdi@gmail.com",
+        password: "M1234#!",
+        estConnecte: true,
+        estBloque: false
+    }
+];
 
 function signUp(nom, email, password, confirmPassword) {
-	
+
+    for (let i = 0; i < baseDeDonnees.length; i++) {
+        const utilisateur = baseDeDonnees[i];
+        if (utilisateur.email === email) {
+            return "cet utilisateur existe déjà"
+        } else if (password !== confirmPassword) {
+            return "mot de passe incorrect"
+        }
+
+    }
+    const id = baseDeDonnees.length + 1;
+    const newUser = {
+        id: id,
+        nom: nom,
+        email: email,
+        password: password,
+        estConnecte: false,
+        estBloque: false
+    }
+    baseDeDonnees.push(newUser);
+    return newUser;
+
+
 }
+console.log(signUp("joe", "joe@gmail.com", "Joe", "Joe"));
 
 function login() {
-	
+
 }
 
 module.exports = { baseDeDonnees, signUp, login };
